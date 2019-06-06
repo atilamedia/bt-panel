@@ -46,7 +46,7 @@ fi
 
 #非官方安装
 github_Url=https://github.com/atilamedia/bt-panel
-github_Tag=5.3.0
+github_Tag=5.3.1
 
 #自动选择下载节点
 CN='125.88.182.172'
