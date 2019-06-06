@@ -11,34 +11,7 @@ echo "
 | The WebPanel URL will be http://SERVER_IP:8888 when installed.
 +----------------------------------------------------------------------
 "
-deepinSys=`cat /etc/issue`
-if [[ "${deepinSys}" =~ eepin ]]; then
-	isroot=''
-	if [ `whoami` != "root" ];then
-		isroot='sudo '
-	fi
-	if [ -f "/etc/init.d/bt" ]; then
-		password=`${isroot}cat /www/server/panel/default.pl`
-		port=`${isroot}cat /www/server/panel/data/port.pl`
-		echo -e "=================================================================="
-		echo -e "Bt-Panel: http://localhost:$port"
-		echo -e "默认账户: admin"
-		echo -e "默认密码: $password"
-		echo -e "=================================================================="
-		echo -e "正在尝试打开浏览器..."
-		if [ -f "/opt/google/chrome/chrome" ]; then
-			${isroot}/opt/google/chrome/chrome --no-sandbox http://localhost:$port
-			exit;
-		fi
-		if [ -f "/usr/lib/firefox/firefox" ]; then
-			/usr/lib/firefox/firefox http://localhost:$port
-			exit;
-		fi
-		echo -e "找不到chrome/firefox浏览器，请自行打开浏览器访问: http://loshost:$port"
-		exit;
 
-	fi
-fi
 if [ `whoami` != "root" ];then
 	echo -e "\033[31mError: Please run the script with root privileges on Ubuntu, for example: sudo bash install.sh\033[0m";
 	exit;
@@ -48,26 +21,6 @@ fi
 github_Url=https://github.com/atilamedia/bt-panel
 github_Tag=5.3.1
 
-#自动选择下载节点
-CN='125.88.182.172'
-HK='download.bt.cn'
-HK2='103.224.251.67'
-US='128.1.164.196'
-sleep 0.5;
-CN_PING=`ping -c 1 -w 1 $CN|grep time=|awk '{print $7}'|sed "s/time=//"`
-HK_PING=`ping -c 1 -w 1 $HK|grep time=|awk '{print $7}'|sed "s/time=//"`
-HK2_PING=`ping -c 1 -w 1 $HK2|grep time=|awk '{print $7}'|sed "s/time=//"`
-US_PING=`ping -c 1 -w 1 $US|grep time=|awk '{print $7}'|sed "s/time=//"`
-
-echo "$HK_PING $HK" > ping.pl
-echo "$HK2_PING $HK2" >> ping.pl
-echo "$US_PING $US" >> ping.pl
-echo "$CN_PING $CN" >> ping.pl
-nodeAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
-if [ "$nodeAddr" == "" ];then
-	nodeAddr=$HK2
-fi
-#download_Url=http://$nodeAddr:5880
 download_Url=http://128.1.164.196:5880
 rm -f ping.pl
 
@@ -174,7 +127,7 @@ apt-get install lsb-release -y
 for pace in wget curl python python-dev python-imaging zip unzip openssl libssl-dev gcc libxml2 libxml2-dev libxslt zlib1g zlib1g-dev libjpeg-dev libpng-dev lsof libpcre3 libpcre3-dev cron;
 do apt-get -y install $pace --force-yes; done
 apt-get -y install python-pip python-dev
-
+sleep 5
 tmp=$(python -V 2>&1|awk '{print $2}')
 pVersion=${tmp:0:3}
 
@@ -438,14 +391,14 @@ fi
 sh $setup_path/server/panel/install/nginx.sh install 1.14
 sleep 3
 
-sh $setup_path/server/panel/install/php.sh install 5.6
-sleep 3
+#sh $setup_path/server/panel/install/php.sh install 5.6
+#sleep 3
 
-sh $setup_path/server/panel/install/mysql.sh install 5.6
-sleep 3
+#sh $setup_path/server/panel/install/mysql.sh install 5.6
+#sleep 3
 
-sh $setup_path/server/panel/install/phpmyadmin.sh install 4.4
-sleep 3
+#sh $setup_path/server/panel/install/phpmyadmin.sh install 4.4
+#sleep 3
 
 curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/SetupCount?type=Linux > /dev/null 2>&1
 
