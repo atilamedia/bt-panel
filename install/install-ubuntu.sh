@@ -67,7 +67,8 @@ nodeAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
 if [ "$nodeAddr" == "" ];then
 	nodeAddr=$HK2
 fi
-download_Url=http://$nodeAddr:5880
+#download_Url=http://$nodeAddr:5880
+download_Url=http://128.1.164.196:5880
 rm -f ping.pl
 
 setup_path=/www
