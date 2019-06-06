@@ -433,6 +433,19 @@ else
 		echo "$address" > $setup_path/server/panel/data/iplist.txt
 	fi
 fi
+
+sh $setup_path/server/panel/install/nginx.sh install 1.14
+sleep 3
+
+sh $setup_path/server/panel/install/php.sh install 5.6
+sleep 3
+
+sh $setup_path/server/panel/install/mysql.sh install 5.6
+sleep 3
+
+sh $setup_path/server/panel/install/phpmyadmin.sh install 4.4
+sleep 3
+
 curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/SetupCount?type=Linux > /dev/null 2>&1
 
 echo -e "=================================================================="
