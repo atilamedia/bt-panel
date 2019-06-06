@@ -388,6 +388,9 @@ else
 	fi
 fi
 
+sh $setup_path/server/panel/install/lib.sh
+sleep 3
+
 sh $setup_path/server/panel/install/nginx.sh install 1.14
 sleep 3
 
