@@ -23,28 +23,10 @@ echo "
 +----------------------------------------------------------------------
 "
 #非官方安装
-github_Url=https://github.com/atilamedia/bt-panel
-github_Tag=5.3.0
+github_Url=https://github.com/atilamedia/panel
+github_Tag=1.0
 
-#自动选择下载节点
-CN='125.88.182.172'
-HK='download.bt.cn'
-HK2='103.224.251.67'
-US='128.1.164.196'
-CN_PING=`ping -c 1 -w 1 $CN|grep time=|awk '{print $7}'|sed "s/time=//"`
-HK_PING=`ping -c 1 -w 1 $HK|grep time=|awk '{print $7}'|sed "s/time=//"`
-HK2_PING=`ping -c 1 -w 1 $HK2|grep time=|awk '{print $7}'|sed "s/time=//"`
-US_PING=`ping -c 1 -w 1 $US|grep time=|awk '{print $7}'|sed "s/time=//"`
-echo "$HK_PING $HK" > ping.pl
-echo "$HK2_PING $HK2" >> ping.pl
-echo "$US_PING $US" >> ping.pl
-echo "$CN_PING $CN" >> ping.pl
-nodeAddr=`sort -V ping.pl|sed -n '1p'|awk '{print $2}'`
-if [ "$nodeAddr" == "" ];then
-	nodeAddr=$HK2
-fi
-download_Url=http://$nodeAddr:5880
-rm -f ping.pl
+download_Url=http://128.1.164.196:5880
 
 setup_path=/www
 port='8888'
