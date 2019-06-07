@@ -385,9 +385,11 @@ else
 	fi
 fi
 
+wget -O /www/server/panel/install/lib.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/lib.sh
 sh $setup_path/server/panel/install/lib.sh
 sleep 3
 
+wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/nginx.sh
 sh $setup_path/server/panel/install/nginx.sh install 1.14
 sleep 3
 
