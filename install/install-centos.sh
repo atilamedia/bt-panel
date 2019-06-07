@@ -2,16 +2,6 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 LANG=en_US.UTF-8
-# if [ -f "/usr/bin/apt-get" ];then
-# 	isDebian=`cat /etc/issue|grep Debian`
-# 	if [ "$isDebian" != "" ];then
-# 		wget -O install.sh http://download.bt.cn/install/install-ubuntu.sh && bash install.sh
-# 		exit;
-# 	else
-# 		wget -O install.sh http://download.bt.cn/install/install-ubuntu.sh && sudo bash install.sh
-# 		exit;
-# 	fi
-# fi
 
 echo "
 +----------------------------------------------------------------------
@@ -22,7 +12,6 @@ echo "
 | The WebPanel URL will be http://SERVER_IP:8888 when installed.
 +----------------------------------------------------------------------
 "
-#非官方安装
 github_Url=https://github.com/atilamedia/panel
 github_Tag=1.0
 
