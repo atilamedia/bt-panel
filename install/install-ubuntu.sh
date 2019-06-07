@@ -17,12 +17,10 @@ if [ `whoami` != "root" ];then
 	exit;
 fi
 
-#非官方安装
-github_Url=https://github.com/atilamedia/bt-panel
-github_Tag=5.3.1
+github_Url=https://github.com/atilamedia/panel
+github_Tag=1.0
 
 download_Url=http://128.1.164.196:5880
-rm -f ping.pl
 
 setup_path=/www
 port='8888'
