@@ -1,15 +1,42 @@
 #!/bin/bash
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
-public_file=/www/server/panel/install/public.sh
-if [ ! -f $public_file ];then
-	wget -O $public_file http://download.bt.cn/install/public.sh -T 5;
+GetCpuStat(){
+        time1=$(cat /proc/stat |grep 'cpu ')
+        sleep 1
+        time2=$(cat /proc/stat |grep 'cpu ')
+        cpuTime1=$(echo ${time1}|awk '{print $2+$3+$4+$5+$6+$7+$8}')
+        cpuTime2=$(echo ${time2}|awk '{print $2+$3+$4+$5+$6+$7+$8}')
+        runTime=$((${cpuTime2}-${cpuTime1}))
+        idelTime1=$(echo ${time1}|awk '{print $5}')
+        idelTime2=$(echo ${time2}|awk '{print $5}')
+        idelTime=$((${idelTime2}-${idelTime1}))
+        useTime=$(((${runTime}-${idelTime})*3))
+        [ ${useTime} -gt ${runTime} ] && cpuBusy="true"
+        if [ "${cpuBusy}" == "true" ]; then
+                cpuCore=$((${cpuInfo}/2))
+        else
+                cpuCore=$((${cpuInfo}-1))
+        fi
+}
+GetPackManager(){
+        if [ -f "/usr/bin/yum" ] && [ -f "/etc/yum.conf" ]; then
+                PM="yum"
+        elif [ -f "/usr/bin/apt-get" ] && [ -f "/usr/bin/dpkg" ]; then
+                PM="apt-get"            
+        fi
+}
+cpuInfo=$(getconf _NPROCESSORS_ONLN)
+if [ "${cpuInfo}" -ge "4" ];then
+        GetCpuStat
+else
+        cpuCore="1"
 fi
-. $public_file
+GetPackManager
 
-download_Url=$NODE_URL
+download_Url='http://128.1.164.196:5880'
 
-Root_Path=`cat /var/bt_setupPath.conf`
+Root_Path='/www'
 Setup_Path=$Root_Path/server/mysql
 Data_Path=$Root_Path/server/data
 Is_64bit=`getconf LONG_BIT`
