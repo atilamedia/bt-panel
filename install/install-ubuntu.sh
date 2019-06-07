@@ -393,11 +393,11 @@ wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/ati
 sh /www/server/panel/install/nginx.sh install 1.12
 sleep 3
 
-wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/php.sh
+wget -O /www/server/panel/install/php.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/php.sh
 sh /www/server/panel/install/php.sh install 5.6
 sleep 3
 
-wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/mysql.sh
+wget -O /www/server/panel/install/mysql.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/mysql.sh
 sh /www/server/panel/install/mysql.sh install 5.6
 sleep 3
 
