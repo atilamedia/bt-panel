@@ -2,6 +2,13 @@
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 
+cpuInfo=$(getconf _NPROCESSORS_ONLN)
+if [ "${cpuInfo}" -ge "4" ];then
+        GetCpuStat
+else
+        cpuCore="1"
+fi
+
 download_Url='http://128.1.164.196:5880'
 mkdir -p /www/server
 run_path="/root"
@@ -274,12 +281,6 @@ GetPackManager(){
                 PM="apt-get"            
         fi
 }
-cpuInfo=$(getconf _NPROCESSORS_ONLN)
-if [ "${cpuInfo}" -ge "4" ];then
-        GetCpuStat
-else
-        cpuCore="1"
-fi
 
 GetPackManager
 Install_Lib
