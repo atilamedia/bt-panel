@@ -386,18 +386,20 @@ else
 fi
 
 wget -O /www/server/panel/install/lib.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/lib.sh
-sh $setup_path/server/panel/install/lib.sh
+sh /www/server/panel/install/lib.sh
 sleep 3
 
 wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/nginx.sh
-sh $setup_path/server/panel/install/nginx.sh install 1.14
+sh /www/server/panel/install/nginx.sh install 1.12
 sleep 3
 
-#sh $setup_path/server/panel/install/php.sh install 5.6
-#sleep 3
+wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/php.sh
+sh /www/server/panel/install/php.sh install 5.6
+sleep 3
 
-#sh $setup_path/server/panel/install/mysql.sh install 5.6
-#sleep 3
+wget -O /www/server/panel/install/nginx.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/mysql.sh
+sh /www/server/panel/install/mysql.sh install 5.6
+sleep 3
 
 #sh $setup_path/server/panel/install/phpmyadmin.sh install 4.4
 #sleep 3
