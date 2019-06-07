@@ -47,7 +47,7 @@ nginx_116='1.16.0'
 nginx_117='1.17.0'
 openresty='1.13.6.2'
 
-Root_Path=`cat /var/bt_setupPath.conf`
+Root_Path=`/www`
 Setup_Path=$Root_Path/server/nginx
 run_path='/root'
 
