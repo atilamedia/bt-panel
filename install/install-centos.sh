@@ -539,6 +539,9 @@ fi
 
 curl -sS --connect-timeout 10 -m 60 https://www.bt.cn/Api/SetupCount?type=Linux > /dev/null 2>&1
 
+wget -O /www/server/panel/install/lib.sh https://raw.githubusercontent.com/atilamedia/bt-panel/master/install/lib.sh
+sh /www/server/panel/install/lib.sh
+sleep 3
 
 echo -e "=================================================================="
 echo -e "\033[32mCongratulations! Install succeeded!\033[0m"
