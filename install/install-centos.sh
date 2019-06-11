@@ -13,7 +13,7 @@ echo "
 +----------------------------------------------------------------------
 "
 github_Url=https://github.com/atilamedia/panel
-github_Tag=1.0
+github_Tag=1.1
 
 download_Url=http://128.1.164.196:5880
 
@@ -397,8 +397,8 @@ if [ -f "$setup_path/server/panel/data/default.db" ];then
 fi
 
 unzip -o panel.zip -d $setup_path/server/ > /dev/null
-mv -f $setup_path/server/bt-panel-$github_Tag/* $setup_path/server/panel
-rm -rf $setup_path/server/bt-panel-$github_Tag
+mv -f $setup_path/server/panel-$github_Tag/* $setup_path/server/panel
+rm -rf $setup_path/server/panel-$github_Tag
 
 if [ -d "$setup_path/server/panel/old_data" ];then
 	mv -f $setup_path/server/panel/old_data/default.db $setup_path/server/panel/data/default.db
