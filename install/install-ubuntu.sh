@@ -294,6 +294,7 @@ fi
 
 unzip -o panel.zip -d $setup_path/server/ > /dev/null
 mv -f $setup_path/server/panel-$github_Tag/* $setup_path/server/panel
+rm -rf $setup_path/server/panel-$github_Tag
 
 if [ -d "$setup_path/server/panel/old_data" ];then
 	mv -f $setup_path/server/panel/old_data/default.db $setup_path/server/panel/data/default.db
