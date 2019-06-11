@@ -18,7 +18,7 @@ if [ `whoami` != "root" ];then
 fi
 
 github_Url=https://github.com/atilamedia/panel
-github_Tag=1.1
+github_Tag=1.2
 
 download_Url=http://128.1.164.196:5880
 
