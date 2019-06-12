@@ -126,8 +126,8 @@ for pace in wget curl python python-dev python-imaging zip unzip openssl libssl-
 do apt-get -y install $pace --force-yes; done
 apt-get -y install python-pip python-dev
 sleep 5
-tmp=$(python -V 2>&1|awk '{print $2}')
-pVersion=${tmp:0:3}
+#tmp=$(python -V 2>&1|awk '{print $2}')
+#pVersion=${tmp:0:3}
 
 Install_setuptools()
 {
